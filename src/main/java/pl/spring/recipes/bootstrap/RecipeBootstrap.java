@@ -1,8 +1,10 @@
 package pl.spring.recipes.bootstrap;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import pl.spring.recipes.domain.*;
 import pl.spring.recipes.repositories.CategoryRepository;
 import pl.spring.recipes.repositories.RecipeRepository;
@@ -31,6 +33,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     }
 
     @Override
+    @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         recipeRepository.saveAll(getRecipes());
     }
